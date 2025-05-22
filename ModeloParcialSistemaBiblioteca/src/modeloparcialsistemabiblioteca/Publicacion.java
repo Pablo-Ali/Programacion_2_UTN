@@ -6,7 +6,7 @@ import java.util.Objects;
  *
  * @author pablo
  */
-public abstract class Publicacion {
+public abstract class Publicacion implements Comparable<Publicacion>{
     protected String titulo;
     protected int añoPublicacion;
 
@@ -38,6 +38,11 @@ public abstract class Publicacion {
 
         Publicacion publicacion = (Publicacion) obj;
         return this.titulo.equalsIgnoreCase(publicacion.titulo) && this.añoPublicacion == publicacion.añoPublicacion;
+    }
+    
+    @Override
+    public int compareTo(Publicacion otra){
+        return Integer.compare(this.añoPublicacion, otra.añoPublicacion);
     }
 
 }

@@ -1,6 +1,7 @@
 package modeloparcialsistemabiblioteca;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,6 +25,8 @@ public class ModeloParcialSistemaBiblioteca {
             System.out.println("1. Agregar publicacion");
             System.out.println("2. Mostrar publicaciones");
             System.out.println("3. Leer publicaciones");
+            System.out.println("4. Ordenar segun año de publicacion");
+            System.out.println("5. Ordenar alfabeticamente");
             System.out.println("0. Salir");
 
             opcion = console.nextInt();
@@ -38,8 +41,17 @@ public class ModeloParcialSistemaBiblioteca {
                     break;
                 
                 case 3:
+                    leerPublicaciones(listaPublicaciones);
                     break;
                 
+                case 4:
+                    ordenarPublicacionesSegunAño(listaPublicaciones);
+                    break;
+                
+                case 5:
+                    ordenarPublicacionesSegunTitulo(listaPublicaciones, new Comparador());
+                    break;
+                    
                 default:
                     System.out.println("Opción no válida");
             }
@@ -73,11 +85,11 @@ public class ModeloParcialSistemaBiblioteca {
                     console.nextLine();
                     String autor = console.nextLine();
                     
-                    System.out.println("Ingrese el genero:\nFICCION\nNO_FICCION\nHISTORIA\nCIENCIA");
                     String genero;
                     do{
+                        System.out.println("Ingrese el genero:\nFICCION\nNO_FICCION\nHISTORIA\nCIENCIA");
                         genero = console.nextLine().toUpperCase();
-                    }while(genero.equals("FICCION") && genero.equals("NO_FICCION") && genero.equals("HISTORIA")  && genero.equals("CIENCIA"));
+                    }while(!genero.equals("FICCION") && !genero.equals("NO_FICCION") && !genero.equals("HISTORIA")  && !genero.equals("CIENCIA"));
                     
                     System.out.println("Ingrese el titulo");
                     titulo = console.nextLine();
@@ -154,5 +166,44 @@ public class ModeloParcialSistemaBiblioteca {
                System.out.println(listaPublicaciones.get(i).toString());
             } 
         }    
+    }
+    
+    public static void leerPublicaciones(List<Publicacion> listaPublicaciones){
+        if (listaPublicaciones.isEmpty()) {
+            System.out.println("Aún no hay publicaciones para leer.");
+        }else{
+           for(Publicacion p : listaPublicaciones){
+               if (p instanceof Legible){
+                   ((Legible) p).leer();
+                }else{
+                    System.out.println("Esta publicacion no puede leerse porque " + p.getTitulo() + " es una ilustracion");
+                }
+            } 
+        }    
+    }
+    
+    public static void ordenarPublicacionesSegunAño(List<Publicacion> listaPublicaciones){
+        if (listaPublicaciones.isEmpty()){
+            System.out.println("Aun no hay publicaciones");
+        }else{
+            Collections.sort(listaPublicaciones);
+            for (int i=0; i < listaPublicaciones.size(); i++){
+               System.out.println(listaPublicaciones.get(i).toString() +
+                       " año: " +
+                       listaPublicaciones.get(i).getAñoPublicacion());
+            } 
+        }
+    }
+    
+    public static void ordenarPublicacionesSegunTitulo(List<Publicacion> listaPublicaciones, Comparador comparador){
+        if (listaPublicaciones.isEmpty()){
+            System.out.println("Aun no hay publicaciones");
+        }else{
+            Collections.sort(listaPublicaciones, comparador);
+            System.out.println("Publicaciones ordenadas alfabeticametne:");
+            for (Publicacion p : listaPublicaciones){
+                System.out.println(p.getTitulo());
+            }
+        }
     }
 }

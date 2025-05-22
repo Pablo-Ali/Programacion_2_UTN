@@ -4,7 +4,7 @@ package modeloparcialsistemabiblioteca;
  *
  * @author pablo
  */
-public class Libro extends Publicacion{
+public class Libro extends Publicacion implements Legible{
     
     private String autor;
     private String genero;
@@ -47,4 +47,9 @@ public class Libro extends Publicacion{
                 this.autor.equalsIgnoreCase(libro.autor) &&
                 this.genero.equalsIgnoreCase(libro.genero);
     }   
+
+    @Override
+    public void leer() {
+        System.out.println("Leyendo el libro: " + getTitulo());
+    }
 }

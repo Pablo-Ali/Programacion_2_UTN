@@ -4,7 +4,7 @@ package modeloparcialsistemabiblioteca;
  *
  * @author pablo
  */
-public class Revista extends Publicacion{
+public class Revista extends Publicacion implements Legible{
     private int numeroEdicion;
 
     public Revista(int numeroEdicion, String titulo, int añoPublicacion) {
@@ -37,4 +37,9 @@ public class Revista extends Publicacion{
                 this.titulo.equalsIgnoreCase(revista.titulo) &&
                 this.numeroEdicion == revista.numeroEdicion;
     } 
+
+    @Override
+    public void leer() {
+        System.out.println("Leyendo la revista " + getTitulo());
+    }
 }
