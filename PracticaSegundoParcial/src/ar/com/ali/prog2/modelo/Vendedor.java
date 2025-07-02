@@ -1,5 +1,7 @@
 package ar.com.ali.prog2.modelo;
 
+import java.util.HashMap;
+
 /**
  *
  * @author pablo
@@ -7,7 +9,7 @@ package ar.com.ali.prog2.modelo;
 public class Vendedor {
     private String usuario;
     private String pin;
-    private int ventas = 0;
+    private int ventas;
 
     public Vendedor(String usuario, String pin, int ventas) {
         this.usuario = usuario;
@@ -32,5 +34,9 @@ public class Vendedor {
             return true;
         }
         return false;
+    }
+    
+    public void registrarUsuario(String usuario, String pin, HashMap<String, Vendedor> vendedores){
+        
     }
 }

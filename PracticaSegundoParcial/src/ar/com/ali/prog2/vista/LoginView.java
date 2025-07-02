@@ -27,6 +27,7 @@ public class LoginView extends VBox{
         
         //botones
         Button btnIngresar = new Button("Ingresar");
+        Button btnRegistro = new Button("Registrarse");
         
         //feedback
         Label mensaje = new Label();
@@ -41,6 +42,16 @@ public class LoginView extends VBox{
                 stage.setScene(new Scene(menu)); //falta terminar el constructor para que no lance error (creo)
             }else{
                 mensaje.setText("Usuario o PIN incorrecto");
+            }
+        });
+        
+        btnRegistro.setOnAction(e ->{
+            String usuario = campoUsuario.getText();
+            String pin = campoPin.getText();
+            
+            if(usuario != null && pin != null){
+                Vendedor v = new Vendedor(usuario, pin, 0);
+                
             }
         });
         
